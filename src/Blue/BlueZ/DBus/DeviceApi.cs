@@ -11,7 +11,7 @@ namespace Blue.BlueZ.DBus
         /// <summary>
         /// The Bluetooth device address of the remote device.
         /// </summary>
-        public string Address { get; set; } = default(string);
+        public string Address { get; set; } = default;
 
         /// <summary>
         /// The Bluetooth remote name. This value can not be
@@ -24,7 +24,7 @@ namespace Blue.BlueZ.DBus
         /// If the Alias property is unset, it will reflect
         /// this value which makes it more convenient.
         /// </summary>
-        public string Name { get; set; } = default(string);
+        public string Name { get; set; } = default;
 
         /// <summary>
         /// The name alias for the remote device. The alias can
@@ -38,34 +38,34 @@ namespace Blue.BlueZ.DBus
         /// When resetting the alias with an empty string, the
         /// property will default back to the remote name.
         /// </summary>
-        public string Alias { get; set; } = default(string);
+        public string Alias { get; set; } = default;
 
         /// <summary>
         /// The Bluetooth class of device of the remote device.
         /// </summary>
-        public uint Class { get; set; } = default(uint);
+        public uint Class { get; set; } = default;
 
         /// <summary>
         /// External appearance of device, as found on GAP service.
         /// </summary>
-        public ushort Appearance { get; set; } = default(ushort);
+        public ushort Appearance { get; set; } = default;
 
         /// <summary>
         /// Proposed icon name according to the freedesktop.org
         /// icon naming specification.
         /// </summary>
-        public string Icon { get; set; } = default(string);
+        public string Icon { get; set; } = default;
 
         /// <summary>
         /// Indicates if the remote device is paired.
         /// </summary>
-        public bool Paired { get; set; } = default(bool);
+        public bool Paired { get; set; } = default;
 
         /// <summary>
         /// Indicates if the remote is seen as trusted. This
         /// setting can be changed by the application.
         /// </summary>
-        public bool Trusted { get; set; } = default(bool);
+        public bool Trusted { get; set; } = default;
 
         /// <summary>
         /// If set to true any incoming connections from the
@@ -73,7 +73,7 @@ namespace Blue.BlueZ.DBus
         /// drivers will also be removed and no new ones will
         /// be probed as long as the device is blocked.
         /// </summary>
-        public bool Blocked { get; set; } = default(bool);
+        public bool Blocked { get; set; } = default;
 
         /// <summary>
         /// Set to true if the device only supports the pre-2.1
@@ -85,61 +85,61 @@ namespace Blue.BlueZ.DBus
         /// in the case of Bluetooth 2.1 (or newer) devices that
         /// have disabled Extended Inquiry Response support.
         /// </summary>
-        public bool LegacyPairing { get; set; } = default(bool);
+        public bool LegacyPairing { get; set; } = default;
 
         /// <summary>
         /// Received Signal Strength Indicator of the remote
         /// device (inquiry or advertising).
         /// </summary>
-        public short RSSI { get; set; } = default(short);
+        public short RSSI { get; set; } = default;
 
         /// <summary>
         /// Indicates if the remote device is currently connected.
         /// A PropertiesChanged signal indicate changes to this
         /// status.
         /// </summary>
-        public bool Connected { get; set; } = default(bool);
+        public bool Connected { get; set; } = default;
 
         /// <summary>
         /// List of 128-bit UUIDs that represents the available
         /// remote services.
         /// </summary>
-        public string[] UUIDs { get; set; } = default(string[]);
+        public string[] UUIDs { get; set; } = default;
 
         /// <summary>
         /// Remote Device ID information in modalias format
         /// used by the kernel and udev.
         /// </summary>
-        public string Modalias { get; set; } = default(string);
+        public string Modalias { get; set; } = default;
 
         /// <summary>
         /// The object path of the adapter the device belongs to.
         /// </summary>
-        public IAdapter1 Adapter { get; set; } = default(IAdapter1);
+        public IAdapter1 Adapter { get; set; } = default;
 
         /// <summary>
         /// Manufacturer specific advertisement data. Keys are
         /// 16 bits Manufacturer ID followed by its byte array
         /// value.
         /// </summary>
-        public IDictionary<ushort, object> ManufacturerData { get; set; } = default(IDictionary<ushort, object>);
+        public IDictionary<ushort, object> ManufacturerData { get; set; } = default;
 
         /// <summary>
         /// Service advertisement data. Keys are the UUIDs in
         /// string format followed by its byte array value.
         /// </summary>
-        public IDictionary<string, object> ServiceData { get; set; } = default(IDictionary<string, object>);
+        public IDictionary<string, object> ServiceData { get; set; } = default;
 
         /// <summary>
         /// Advertised transmitted power level (inquiry or advertising).
         /// </summary>
-        public short TxPower { get; set; } = default(short);
+        public short TxPower { get; set; } = default;
 
         /// <summary>
         /// Indicate whether or not service discovery has been
         /// resolved
         /// </summary>
-        public bool ServicesResolved { get; set; } = default(bool);
+        public bool ServicesResolved { get; set; } = default;
     }
 
     /// <summary>

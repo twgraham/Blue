@@ -8,6 +8,7 @@ namespace Blue
     public interface IBluetoothManager
     {
         Task<List<IBluetoothDevice>> ListDevicesAsync();
+        Task<List<IBluetoothAdapter>> ListAdaptersAsync();
     }
 
     public class BluetoothManager

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tmds.DBus;
 
@@ -89,7 +90,7 @@ namespace Blue.BlueZ.DBus
         /// - only RSSI param is set, and received RSSI is
         ///   higher than RSSI param.
         /// </summary>
-        public string[] UUIDs { get; set; } = default(string[]);
+        public string[] UUIDs { get; set; } = default;
 
         /// <summary>
         /// RSSI threshold value.
@@ -101,7 +102,7 @@ namespace Blue.BlueZ.DBus
         /// that is imposed by StartDiscovery by default,
         /// will not be applied.
         /// </summary>
-        public short RSSI { get; set; } = default(short);
+        public short RSSI { get; set; } = default;
 
         /// <summary>
         /// Pathloss threshold value.
@@ -110,7 +111,7 @@ namespace Blue.BlueZ.DBus
         /// for already existing Device objects, with
         /// updated Pathloss value.
         /// </summary>
-        public ushort Pathloss { get; set; } = default(ushort);
+        public ushort Pathloss { get; set; } = default;
 
         /// <summary>
         ///
@@ -152,29 +153,125 @@ namespace Blue.BlueZ.DBus
     [Dictionary]
     internal class Adapter1Properties
     {
-        public string Address { get; set; } = default(string);
+        /// <summary>
+        /// The Bluetooth device address.
+        /// </summary>
+        public string Address { get; set; } = default;
 
-        public string Name { get; set; } = default(string);
+        /// <summary>
+        /// The Bluetooth system name (pretty hostname).
+        /// This property is either a static system default
+        /// or controlled by an external daemon providing
+        /// access to the pretty hostname configuration.
+        /// </summary>
+        public string Name { get; set; } = default;
 
-        public string Alias { get; set; } = default(string);
+        /// <summary>
+        /// The Bluetooth friendly name. This value can be
+        /// changed.
+        ///
+        /// In case no alias is set, it will return the system
+        /// provided name. Setting an empty string as alias will
+        /// convert it back to the system provided name.
+        ///
+        /// When resetting the alias with an empty string, the
+        /// property will default back to system name.
+        ///
+        /// On a well configured system, this property never
+        /// needs to be changed since it defaults to the system
+        /// name and provides the pretty hostname. Only if the
+        /// local name needs to be different from the pretty
+        /// hostname, this property should be used as last
+        /// </summary>
+        public string Alias { get; set; } = default;
 
-        public uint Class { get; set; } = default(uint);
+        /// <summary>
+        /// The Bluetooth class of device.
+        ///
+        /// This property represents the value that is either
+        /// automatically configured by DMI/ACPI information
+        /// or provided as static configuration.
+        /// </summary>
+        public uint Class { get; set; } = default;
 
-        public bool Powered { get; set; } = default(bool);
+        /// <summary>
+        /// Switch an adapter on or off. This will also set the
+        /// appropriate connectable state of the controller.
+        ///
+        /// The value of this property is not persistent. After
+        /// restart or unplugging of the adapter it will reset
+        /// back to false.
+        /// </summary>
+        public bool Powered { get; set; } = default;
 
-        public bool Discoverable { get; set; } = default(bool);
+        /// <summary>
+        /// Switch an adapter to discoverable or non-discoverable
+        /// to either make it visible or hide it. This is a global
+        /// setting and should only be used by the settings
+        /// application.
+        ///
+        /// If the DiscoverableTimeout is set to a non-zero
+        /// value then the system will set this value back to
+        /// false after the timer expired.
+        ///
+        /// In case the adapter is switched off, setting this
+        /// value will fail.
+        ///
+        /// When changing the Powered property the new state of
+        /// this property will be updated via a PropertiesChanged
+        /// signal.
+        ///
+        /// For any new adapter this settings defaults to false.
+        /// </summary>
+        public bool Discoverable { get; set; } = default;
 
-        public uint DiscoverableTimeout { get; set; } = default(uint);
+        /// <summary>
+        /// The discoverable timeout in seconds. A value of zero
+        /// means that the timeout is disabled and it will stay in
+        /// discoverable/limited mode forever.
+        ///
+        /// The default value for the discoverable timeout should
+        /// be 180 seconds (3 minutes).
+        /// </summary>
+        public uint DiscoverableTimeout { get; set; } = default;
 
-        public bool Pairable { get; set; } = default(bool);
+        /// <summary>
+        /// Switch an adapter to pairable or non-pairable. This is
+        /// a global setting and should only be used by the
+        /// settings application.
+        ///
+        /// Note that this property only affects incoming pairing
+        /// requests.
+        ///
+        /// For any new adapter this settings defaults to true.
+        /// </summary>
+        public bool Pairable { get; set; } = default;
 
-        public uint PairableTimeout { get; set; } = default(uint);
+        /// <summary>
+        /// The pairable timeout in seconds. A value of zero
+        /// means that the timeout is disabled and it will stay in
+        /// pairable mode forever.
+        ///
+        /// The default value for pairable timeout should be
+        /// disabled (value 0).
+        /// </summary>
+        public uint PairableTimeout { get; set; } = default;
 
-        public bool Discovering { get; set; } = default(bool);
+        /// <summary>
+        /// Indicates that a device discovery procedure is active.
+        /// </summary>
+        public bool Discovering { get; set; } = default;
 
-        public string[] UUIDs { get; set; } = default(string[]);
+        /// <summary>
+        /// List of 128-bit UUIDs that represents the available local services.
+        /// </summary>
+        public string[] UUIDs { get; set; } = default;
 
-        public string Modalias { get; set; } = default(string);
+        /// <summary>
+        /// Local Device ID information in modalias format
+        /// used by the kernel and udev.
+        /// </summary>
+        public string Modalias { get; set; } = default;
     }
 
     internal static class Adapter1Extensions
