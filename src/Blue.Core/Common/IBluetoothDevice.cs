@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Blue
+namespace Blue.Common
 {
     public interface IBluetoothDevice
     {

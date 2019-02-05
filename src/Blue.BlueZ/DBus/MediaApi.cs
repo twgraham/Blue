@@ -5,7 +5,7 @@ using Tmds.DBus;
 
 namespace Blue.BlueZ.DBus
 {
-    [DBusInterface("org.bluez.Media1")]
+    [DBusInterface(Interfaces.Media1)]
     internal interface IMedia1 : IDBusObject
     {
         Task RegisterEndpointAsync(ObjectPath Endpoint, IDictionary<string, object> Properties);
@@ -33,7 +33,7 @@ namespace Blue.BlueZ.DBus
         public ObjectPath Playlist { get; private set; } = default;
     }
 
-    [DBusInterface("org.bluez.MediaPlayer1")]
+    [DBusInterface(Interfaces.MediaPlayer1)]
     internal interface IMediaPlayer1 : IDBusObject
     {
         Task PlayAsync();
@@ -49,7 +49,7 @@ namespace Blue.BlueZ.DBus
         Task<IDisposable> WatchPropertiesAsync(Action<PropertyChanges> handler);
     }
 
-    [DBusInterface("org.bluez.MediaControl1")]
+    [DBusInterface(Interfaces.MediaControl1)]
     interface IMediaControl1 : IDevice1
     {
         Task PlayAsync();

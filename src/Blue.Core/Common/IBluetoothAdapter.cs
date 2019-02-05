@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Blue
+namespace Blue.Common
 {
     public interface IBluetoothAdapter
     {

@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blue.BlueZ.DBus;
+using Blue.Common;
+using Blue.Infrastructure;
 using Tmds.DBus;
 
 namespace Blue.BlueZ
 {
-    public class BluetoothAdapter : IBluetoothAdapter
+    public class BluetoothAdapter : IBluetoothAdapter, IBlueZObject
     {
         private readonly IAdapter1 _adapter1;
-        private readonly Connection _connection;
+
+        public ObjectPath ObjectPath => _adapter1.ObjectPath;
 
         public string Address { get; }
         public string Name { get; }
@@ -40,7 +44,19 @@ namespace Blue.BlueZ
 
         public Task RemoveDevice(IBluetoothDevice device)
         {
-            throw new NotImplementedException();
+            if (device is IBlueZObject blueZObject)
+            {
+                return _adapter1.RemoveDeviceAsync(blueZObject.ObjectPath);
+            }
+
+            return Task.FromException(new InvalidOperationException("The bluetooth device belongs to a different manager."));
+        }
+
+        public static BluetoothAdapter Create(Connection connection, ObjectPath objectPath,
+            IDictionary<string, object> properties)
+        {
+            return new BluetoothAdapter(connection.CreateProxy<IAdapter1>(Services.Base, objectPath),
+                properties.ToObject<Adapter1Properties>());
         }
     }
 }

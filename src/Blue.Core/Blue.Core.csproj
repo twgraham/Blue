@@ -2,11 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>7.1</LangVersion>
+        <LangVersion>7.3</LangVersion>
+        <RootNamespace>Blue</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Tmds.DBus" Version="0.7.0" />
+      <PackageReference Include="System.Reactive" Version="4.1.2" />
     </ItemGroup>
 
 </Project>

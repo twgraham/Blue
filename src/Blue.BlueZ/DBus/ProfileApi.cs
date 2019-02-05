@@ -4,7 +4,7 @@ using Tmds.DBus;
 
 namespace Blue.BlueZ.DBus
 {
-    [DBusInterface("org.bluez.ProfileManager1")]
+    [DBusInterface(Interfaces.ProfileManager1)]
     internal interface IProfileManager1 : IDBusObject
     {
         Task RegisterProfileAsync(ObjectPath profile, string uuid, IDictionary<string, object> options);

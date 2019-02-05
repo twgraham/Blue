@@ -31,8 +31,8 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.Network1
     /// Object path	[variable prefix]/{hci0,hci1,...}/dev_XX_XX_XX_XX_XX_XX
     /// </summary>
-    [DBusInterface("org.bluez.Network1")]
-    internal interface INetwork1
+    [DBusInterface(Interfaces.Network1)]
+    internal interface INetwork1 : IDBusObject
     {
         /// <summary>
         /// Connect to the network device and return the network
@@ -79,7 +79,7 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.NetworkServer1
     /// Object path	/org/bluez/{hci0,hci1,...}
     /// </summary>
-    [DBusInterface("org.bluez.NetworkServer1")]
+    [DBusInterface(Interfaces.NetworkServer1)]
     interface INetworkServer1 : IDBusObject
     {
         /// <summary>

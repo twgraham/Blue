@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using Blue.BlueZ.DBus;
+using Blue.Common;
+using Blue.Infrastructure;
+using Tmds.DBus;
 
 namespace Blue.BlueZ
 {
-    public class BluetoothDevice : IBluetoothDevice, IDisposable
+    public class BluetoothDevice : IBluetoothDevice, IBlueZObject, IDisposable
     {
         private readonly IDevice1 _device1;
 
+        public ObjectPath ObjectPath => _device1.ObjectPath;
         public string Address { get; }
         public string Name { get; }
         public string Alias { get; set; }
@@ -71,11 +77,43 @@ namespace Blue.BlueZ
 
         public async Task Pair(CancellationToken cancellationToken = default)
         {
-            await Task.Run(_device1.PairAsync, cancellationToken).ConfigureAwait(false);
-            if (cancellationToken.IsCancellationRequested)
+            try
+            {
+                await Observable.Create<PropertyChanges>(async observer =>
+                    {
+                        var action = new Action<PropertyChanges>(observer.OnNext);
+                        var propertySignal = await _device1.WatchPropertiesAsync(action);
+
+                        try
+                        {
+                            await _device1.PairAsync().ConfigureAwait(false);
+                        }
+                        catch
+                        {
+                            propertySignal.Dispose();
+                            throw;
+                        }
+
+                        return propertySignal;
+                    })
+                    .Where(x => x.GetStruct<bool>(nameof(Device1Properties.Paired)).GetValueOrDefault(false))
+                    .Take(1)
+                    .ToTask(cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            catch (TaskCanceledException)
             {
                 await _device1.CancelPairingAsync().ConfigureAwait(false);
+                throw;
             }
         }
+
+        internal static BluetoothDevice Create(Connection connection, ObjectPath objectPath,
+            IDictionary<string, object> properties)
+        {
+            return new BluetoothDevice(connection.CreateProxy<IDevice1>(Services.Base, objectPath),
+                properties.ToObject<Device1Properties>());
+        }
+
     }
 }

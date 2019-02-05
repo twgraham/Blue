@@ -3,7 +3,7 @@ using Tmds.DBus;
 
 namespace Blue.BlueZ.DBus
 {
-    [DBusInterface("org.bluez.AgentManager1")]
+    [DBusInterface(Interfaces.AgentManager1)]
     internal interface IAgentManager1 : IDBusObject
     {
         Task RegisterAgentAsync(IAgent1 Agent, string Capability);
@@ -19,7 +19,7 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.Agent1
     /// Object path	freely definable
     /// </summary>
-    [DBusInterface("org.bluez.Agent1")]
+    [DBusInterface(Interfaces.Agent1)]
     internal interface IAgent1 : IDBusObject
     {
 	    /// <summary>

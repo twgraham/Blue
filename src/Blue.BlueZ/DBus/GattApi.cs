@@ -38,8 +38,8 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.GattService1
     /// Object path	[variable prefix]/{hci0,hci1,...}/dev_XX_XX_XX_XX_XX_XX/serviceXX
     /// </summary>
-    [DBusInterface("org.bluez.GattService1")]
-    internal interface IGattService1
+    [DBusInterface(Interfaces.GattService1)]
+    internal interface IGattService1 : IDBusObject
     {
     }
 
@@ -91,8 +91,8 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.GattCharacteristic1
     /// Object path	[variable prefix]/{hci0,hci1,...}/dev_XX_XX_XX_XX_XX_XX/serviceXX/charYYYY
     /// </summary>
-    [DBusInterface("org.bluez.GattCharacteristic1")]
-    internal interface IGattCharacteristic1
+    [DBusInterface(Interfaces.GattCharacteristic1)]
+    internal interface IGattCharacteristic1 : IDBusObject
     {
 	    /// <summary>
 	    /// Issues a request to read the value of the
@@ -335,8 +335,8 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.GattDescriptor1
     /// Object path	[variable prefix]/{hci0,hci1,...}/dev_XX_XX_XX_XX_XX_XX/serviceXX/charYYYY/descriptorZZZ
     /// </summary>
-    [DBusInterface("org.bluez.GattDescriptor1")]
-    internal interface IGattDescriptor1
+    [DBusInterface(Interfaces.GattDescriptor1)]
+    internal interface IGattDescriptor1 : IDBusObject
     {
 	    /// <summary>
 	    /// Issues a request to read the value of the
@@ -442,8 +442,8 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.GattProfile1
     /// Object path	&lt;application dependent&gt;
     /// </summary>
-    [DBusInterface("org.bluez.GattProfile1")]
-    internal interface IGattProfile1
+    [DBusInterface(Interfaces.GattProfile1)]
+    internal interface IGattProfile1 : IDBusObject
     {
 	    /// <summary>
 	    /// This method gets called when the service daemon
@@ -538,7 +538,7 @@ namespace Blue.BlueZ.DBus
 	/// Interface	org.bluez.GattManager1
 	/// Object path	[variable prefix]/{hci0,hci1,...}
 	/// </summary>
-	[DBusInterface("org.bluez.GattManager1")]
+	[DBusInterface(Interfaces.GattManager1)]
 	interface IGattManager1 : IDBusObject
 	{
 		/// <summary>

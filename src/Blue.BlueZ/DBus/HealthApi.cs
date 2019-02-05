@@ -4,7 +4,7 @@ using Tmds.DBus;
 
 namespace Blue.BlueZ.DBus
 {
-    [DBusInterface("org.bluez.HealthManager1")]
+    [DBusInterface(Interfaces.HealthManager1)]
     internal interface IHealthManager1 : IDBusObject
     {
         Task<ObjectPath> CreateApplicationAsync(IDictionary<string, object> Config);

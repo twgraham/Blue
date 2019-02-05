@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tmds.DBus;
 
 namespace Blue.BlueZ.DBus
 {
-    [DBusInterface("org.bluez.Adapter1")]
+    [DBusInterface(Interfaces.Adapter1)]
     internal interface IAdapter1 : IDBusObject
     {
         /// <summary>
@@ -66,6 +65,7 @@ namespace Blue.BlueZ.DBus
         ///     org.bluez.Error.Failed
         /// </summary>
         /// <param name="device"></param>
+        Task RemoveDeviceAsync(ObjectPath device);
         Task RemoveDeviceAsync(IDevice1 device);
 
         Task<T> GetAsync<T>(string prop);

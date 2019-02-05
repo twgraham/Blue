@@ -150,7 +150,7 @@ namespace Blue.BlueZ.DBus
     /// Interface	org.bluez.Device1
     /// Object path	[variable prefix]/{hci0,hci1,...}/dev_XX_XX_XX_XX_XX_XX
     /// </summary>
-    [DBusInterface("org.bluez.Device1")]
+    [DBusInterface(Interfaces.Device1)]
     internal interface IDevice1 : IDBusObject
     {
         /// <summary>
