@@ -52,11 +52,10 @@ namespace Blue.BlueZ
             return Task.FromException(new InvalidOperationException("The bluetooth device belongs to a different manager."));
         }
 
-        public static BluetoothAdapter Create(Connection connection, ObjectPath objectPath,
-            IDictionary<string, object> properties)
+        public static BluetoothAdapter Create(ManagedObject managedObject)
         {
-            return new BluetoothAdapter(connection.CreateProxy<IAdapter1>(Services.Base, objectPath),
-                properties.ToObject<Adapter1Properties>());
+            return new BluetoothAdapter(managedObject.CreateProxy<IAdapter1>(Services.Base),
+                managedObject.GetPropertiesForInterface<Adapter1Properties>(Interfaces.Adapter1));
         }
     }
 }

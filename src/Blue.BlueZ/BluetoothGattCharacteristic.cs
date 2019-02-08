@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blue.BlueZ.DBus;
 using Blue.Common.Gatt;
-using Blue.Infrastructure;
 using Tmds.DBus;
 
 namespace Blue.BlueZ
@@ -13,7 +12,7 @@ namespace Blue.BlueZ
 
         public ObjectPath ObjectPath => _gattCharacteristic1Proxy.ObjectPath;
         public string UUID { get; }
-        public IBluetoothGattService Service { get; }
+        public IBluetoothGattService Service { get; set; }
         public List<IBluetoothGattDescriptor> Descriptors { get; }
         public bool Notifying { get; }
 
@@ -23,6 +22,15 @@ namespace Blue.BlueZ
             _gattCharacteristic1Proxy = gattCharacteristic1;
             UUID = properties.UUID;
             Notifying = properties.Notifying;
+            Descriptors = new List<IBluetoothGattDescriptor>();
+        }
+
+        internal BluetoothGattCharacteristic(ManagedObject managedObject)
+            : this(
+                managedObject.CreateProxy<IGattCharacteristic1>(Services.Base),
+                managedObject.GetPropertiesForInterface<GattCharacteristic1Properties>(Interfaces.GattCharacteristic1)
+            )
+        {
         }
 
         public async Task<byte[]> ReadValueAsync(bool sendConfirmOnReceive = false)
@@ -47,14 +55,6 @@ namespace Blue.BlueZ
         public Task StopNotifyAsync()
         {
             return _gattCharacteristic1Proxy.StopNotifyAsync();
-        }
-
-        public static BluetoothGattCharacteristic Create(Connection connection, ObjectPath objectPath,
-            IDictionary<string, object> properties)
-        {
-            return new BluetoothGattCharacteristic(
-                connection.CreateProxy<IGattCharacteristic1>(Services.Base, objectPath),
-                properties.ToObject<GattCharacteristic1Properties>());
         }
     }
 }

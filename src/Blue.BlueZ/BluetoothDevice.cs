@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blue.BlueZ.DBus;
 using Blue.Common;
-using Blue.Infrastructure;
 using Tmds.DBus;
 
 namespace Blue.BlueZ
@@ -108,11 +107,10 @@ namespace Blue.BlueZ
             }
         }
 
-        internal static BluetoothDevice Create(Connection connection, ObjectPath objectPath,
-            IDictionary<string, object> properties)
+        internal static BluetoothDevice Create(ManagedObject managedObject)
         {
-            return new BluetoothDevice(connection.CreateProxy<IDevice1>(Services.Base, objectPath),
-                properties.ToObject<Device1Properties>());
+            return new BluetoothDevice(managedObject.CreateProxy<IDevice1>(Services.Base),
+                managedObject.GetPropertiesForInterface<Device1Properties>(Interfaces.Device1));
         }
 
     }

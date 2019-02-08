@@ -115,7 +115,7 @@ namespace Blue.BlueZ.DBus
         /// <summary>
         /// The object path of the adapter the device belongs to.
         /// </summary>
-        public IAdapter1 Adapter { get; set; } = default;
+        public ObjectPath Adapter { get; set; } = default;
 
         /// <summary>
         /// Manufacturer specific advertisement data. Keys are

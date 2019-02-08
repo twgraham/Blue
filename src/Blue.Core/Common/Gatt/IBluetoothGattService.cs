@@ -8,8 +8,6 @@ namespace Blue.Common.Gatt
 
         bool Primary { get; }
 
-        IBluetoothDevice Device { get; }
-
         List<IBluetoothGattCharacteristic> Characteristics { get; }
     }
 }
